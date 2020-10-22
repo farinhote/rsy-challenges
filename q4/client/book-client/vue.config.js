@@ -9,4 +9,12 @@ module.exports = {
       path.resolve(__dirname, `src/api/${apiClient}`),
     );
   },
+
+  css: {
+    loaderOptions: {
+      sass: {
+        prependData: `@import "@/styles/_variables.scss";`
+      }
+    }
+  }
 };

@@ -1,18 +1,18 @@
 <template>
   <fragment>
     <h1>Top books of all time</h1>
-    <div class="book">eu</div>
-    <div v-for="book in books" :key="book.slug">{{book.title}}</div>
+    <Book v-for="book in books" :key="book.slug" :book="book" />
   </fragment>
 </template>
 
 <script>
 
 import { Fragment } from 'vue-fragment';
+import Book from '@/components/Book.vue';
 
 export default {
   name: "ListBooks",
-  components: { Fragment },
+  components: { Fragment, Book },
 
   created() {
     this.$store.dispatch("fetchBooks");

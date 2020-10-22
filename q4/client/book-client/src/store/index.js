@@ -15,17 +15,13 @@ export default new Vuex.Store({
   },
   actions: {
     fetchBooks({ commit }) {
-      return new Promise((resolve, reject) => {
-        client
-          .fetchBooks()
-          .then((response) => {
-            commit("FETCH_BOOKS", response.books);
-            resolve();
-          })
-          .catch((error) => {
-            console.log(error.statusText);
-          });
-      });
+      return client.fetchBooks()
+        .then((response) => {
+          commit("FETCH_BOOKS", response.books);
+        })
+        .catch((error) => {
+          console.log(error.statusText);
+        });
     },
   },
   modules: {
