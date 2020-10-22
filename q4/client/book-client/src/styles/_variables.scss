@@ -1,6 +1,11 @@
 $primary-background: #FAFAF3;
 $secondary-background: #FFFFFF;
 
+$accent-color: #DEAD4A;
+$accent-color-darker: #B58A40;
+
+$font: Helvetica, sans-serif;
+
 $border-radius: 8px;
 $max-page-width: 80%;
 
@@ -9,4 +14,16 @@ $margin-center: 0 auto;
 @mixin center() {
     width: $max-page-width;
     margin: $margin-center;
+}
+
+@mixin title() {
+    padding: 1.2rem;
+    font-size: 2rem;
+    color: $accent-color;
+}
+
+@mixin book-title() {
+    padding: 0.2rem;
+    font-size: 1.2rem;
+    color: $accent-color-darker;
 }

@@ -33,6 +33,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+h1 {
+  @include title();
+}
+
 .book-wrapper ::v-deep .book:nth-child(odd) {
   background-color: $secondary-background;
 }

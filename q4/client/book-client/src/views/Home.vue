@@ -19,5 +19,6 @@ export default {
 <style scoped lang="scss">
 .home {
   @include center();
+  box-shadow: 0 4px 10px gray;
 }
 </style>
