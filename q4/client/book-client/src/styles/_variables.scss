@@ -1,1 +1,12 @@
-$primary-color: red;
+$primary-background: #FAFAF3;
+$secondary-background: #FFFFFF;
+
+$border-radius: 8px;
+$max-page-width: 80%;
+
+$margin-center: 0 auto;
+
+@mixin center() {
+    width: $max-page-width;
+    margin: $margin-center;
+}
