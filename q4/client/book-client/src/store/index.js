@@ -6,11 +6,12 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    books: []
+  },
+  mutations: {
     FETCH_BOOKS(state, books) {
       state.books = books
     }
-  },
-  mutations: {
   },
   actions: {
     fetchBooks({ commit }) {
@@ -18,7 +19,7 @@ export default new Vuex.Store({
         client
           .fetchBooks()
           .then((response) => {
-            commit("FETCH_BOOKS", response.body);
+            commit("FETCH_BOOKS", response.books);
             resolve();
           })
           .catch((error) => {

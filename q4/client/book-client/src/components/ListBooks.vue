@@ -2,6 +2,7 @@
   <fragment>
     <h1>Top books of all time</h1>
     <div class="book">eu</div>
+    <div v-for="book in books" :key="book.slug">{{book.title}}</div>
   </fragment>
 </template>
 
@@ -12,9 +13,6 @@ import { Fragment } from 'vue-fragment';
 export default {
   name: "ListBooks",
   components: { Fragment },
-  props: {
-    msg: String,
-  },
 
   created() {
     this.$store.dispatch("fetchBooks");
@@ -22,7 +20,7 @@ export default {
 
   computed: {
     books () {
-      return store.state.books
+      return this.$store.state.books
     }
   }
 };
