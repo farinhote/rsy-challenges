@@ -9,4 +9,9 @@ export default {
       .get(`${API_URL}${BOOKS}`)
       .then((response) => response.data);
   },
+  fetchBook(slug) {
+    return axios
+      .get(`${API_URL}${BOOKS}/${slug}`)
+      .then((response) => response.data);
+  },
 };

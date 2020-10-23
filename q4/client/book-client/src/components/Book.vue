@@ -83,6 +83,7 @@ a {
     border-radius: $border-radius;
     height: 12rem;
     cursor: pointer;
+    margin-right: 1rem;
   }
 }
 </style>

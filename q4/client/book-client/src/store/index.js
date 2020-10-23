@@ -27,6 +27,15 @@ export default new Vuex.Store({
           console.log(error.statusText);
         });
     },
+    fetchBook({ commit }, bookSlug) {
+      return client.fetchBook(bookSlug)
+        .then((response) => {
+          commit("FETCH_BOOK", response);
+        })
+        .catch((error) => {
+          console.log(error.statusText);
+        });
+    },
   },
   modules: {
   },
