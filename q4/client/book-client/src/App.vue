@@ -13,6 +13,7 @@
   color: #2c3e50;
   background-color: $primary-background;
   font: 100% $font;
+  color: $primary-color;
   min-height: 100%;
 }
 </style>

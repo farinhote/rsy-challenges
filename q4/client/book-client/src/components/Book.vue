@@ -1,15 +1,22 @@
 <template>
   <div class="book">
     <div class="book-info">
-      <div class="header">
-        <span class="title">{{ title }}</span>
-        <span class="rating">{{ rating }}</span>
-      </div>
+      <router-link :to="`/book/${book.slug}`">
+        <div class="header">
+          <span class="title">{{ title }}</span>
+          <span class="rating">{{ rating }}</span>
+        </div>
+      </router-link>
       <div class="author">{{ book.author }}</div>
       <div class="synopsis">{{ synopsis }}</div>
       <Vote :upvotes="book.upvotes" :upvoted="book.upvoted" />
     </div>
-    <img :src="book.cover" />
+
+    <router-link
+      tag="img"
+      :src="book.cover"
+      :to="`/book/${book.slug}`"
+    />
   </div>
 </template>
 
@@ -43,6 +50,15 @@ export default {
   @include book-title();
 }
 
+a {
+  text-decoration: none;
+
+  .rating{
+    font: 100% $font;
+    color: $primary-color;
+  }
+}
+
 .book {
   display: grid;
   grid-template-columns: 5fr 1fr;
@@ -63,8 +79,10 @@ export default {
 
   img {
     align-self: center;
+    justify-self: center;
     border-radius: $border-radius;
     height: 12rem;
+    cursor: pointer;
   }
 }
 </style>

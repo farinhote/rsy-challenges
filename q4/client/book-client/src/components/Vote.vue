@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import { truncate } from "lodash";
 import Vote from "@/components/Vote.vue";
 
 export default {
@@ -16,7 +15,7 @@ export default {
   components: {},
   props: {
     upvoted: Boolean,
-    upvotes: Number
+    upvotes: Number,
   },
 
   data() {
@@ -28,7 +27,9 @@ export default {
 
   methods: {
     upvote() {
-      this.isUpvoted ? (this.numberOfUpvotes -= 1) : (this.numberOfUpvotes += 1);
+      this.isUpvoted
+        ? (this.numberOfUpvotes -= 1)
+        : (this.numberOfUpvotes += 1);
 
       this.isUpvoted = !this.isUpvoted;
     },
@@ -59,6 +60,7 @@ export default {
     padding: 0.6rem 1rem;
     margin-right: 1rem;
     border-radius: $border-radius * 1.4;
+    cursor: pointer;
     border-style: none;
     outline: none;
 
