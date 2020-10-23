@@ -6,11 +6,15 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    books: []
+    books: [],
+    book: {},
   },
   mutations: {
     FETCH_BOOKS(state, books) {
-      state.books = books
+      state.books = books;
+    },
+    FETCH_BOOK(state, book) {
+      state.book = book;
     }
   },
   actions: {

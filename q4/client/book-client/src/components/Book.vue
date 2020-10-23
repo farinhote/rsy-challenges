@@ -1,16 +1,13 @@
 <template>
   <div class="book">
     <div class="book-info">
-      <div>
-        <div class="title">{{ title }}</div>
-        <div class="rating">{{ rating }}</div>
+      <div class="header">
+        <span class="title">{{ title }}</span>
+        <span class="rating">{{ rating }}</span>
       </div>
       <div class="author">{{ book.author }}</div>
       <div class="synopsis">{{ synopsis }}</div>
-      <div class="upvoted">
-        <button @click="upvote">{{upvotedText}}</button>
-        <span>{{ timesUpvoted }}</span>
-      </div>
+      <Vote :upvotes="book.upvotes" :upvoted="book.upvoted" />
     </div>
     <img :src="book.cover" />
   </div>
@@ -18,27 +15,13 @@
 
 <script>
 import { truncate } from "lodash";
+import Vote from "@/components/Vote.vue";
 
 export default {
   name: "Book",
-  components: {},
+  components: { Vote },
   props: {
     book: Object,
-  },
-
-  data() {
-    return {
-      upvoted: this.book.upvoted,
-      upvotes: this.book.upvotes
-    };
-  },
-
-  methods: {
-    upvote() {
-      this.upvoted ? this.upvotes -= 1 : this.upvotes += 1;
-
-      this.upvoted = !this.upvoted;
-    },
   },
 
   computed: {
@@ -50,15 +33,6 @@ export default {
     },
     rating() {
       return `(${this.book.rating}/10)`;
-    },
-    upvotedText() {
-      return this.upvoted ? "Upvoted" : "Upvote";
-    },
-    timesUpvoted() {
-      const upvotedText = `Upvote ${this.upvotes} time`;
-      const times = this.upvotes === 1 ? "" : "s";
-
-      return `${upvotedText}${times}`;
     },
   },
 };
@@ -73,16 +47,24 @@ export default {
   display: grid;
   grid-template-columns: 5fr 1fr;
 
-  height: 16rem;
-  align-items: center;
+  min-height: 14rem;
 
   .book-info {
-    margin: 2rem;
+    align-self: start;
+    text-align: start;
+    margin: 1rem 2rem;
+    .author {
+      font-style: italic;
+      font-size: 0.8rem;
+
+      padding: 0.8rem 0 1rem 0;
+    }
   }
 
   img {
+    align-self: center;
     border-radius: $border-radius;
-    height: 10rem;
+    height: 12rem;
   }
 }
 </style>
