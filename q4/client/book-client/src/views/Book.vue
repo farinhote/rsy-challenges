@@ -1,29 +1,13 @@
 <template>
-  <fragment>
-    <div class="book-wrapper">  <!-- Hacky workaround for v-deep -->
-    </div>
-  </fragment>
+    <BookArticle class="book-wrapper" />
 </template>
 
 <script>
-import { Fragment } from "vue-fragment";
+import BookArticle from "@/components/BookArticle.vue";
 
 export default {
   name: "Book",
-  components: { Fragment },
-
-  created() {
-    // If the last book is still in store we clean it up before fetching a new one
-    if (this.$store.state.book.slug) this.$store.commit('FETCH_BOOK', {});
-
-    this.$store.dispatch('fetchBook', this.$route.params.id);
-  },
-
-  computed: {
-    book() {
-      return this.$store.state.book;
-    },
-  },
+  components: { BookArticle },
 };
 </script>
 
