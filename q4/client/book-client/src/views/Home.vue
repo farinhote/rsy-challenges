@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home-wrapper">
     <ListBooks/>
   </div>
 </template>
@@ -17,8 +17,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.home {
-  @include center();
-  box-shadow: 0 4px 10px gray;
+.home-wrapper {
+  @include view-element();
 }
 </style>

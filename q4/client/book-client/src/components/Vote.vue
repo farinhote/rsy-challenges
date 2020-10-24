@@ -49,7 +49,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .upvote {
   padding: 1rem;
   padding-top: 2rem;

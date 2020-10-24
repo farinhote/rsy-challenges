@@ -45,9 +45,9 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .title {
-  @include book-title();
+  @include book-title(1.2rem, 500);
 }
 
 a {

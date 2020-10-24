@@ -1,5 +1,7 @@
 <template>
-    <BookArticle class="book-wrapper" />
+  <div class="book-wrapper">
+    <BookArticle />
+  </div>
 </template>
 
 <script>
@@ -13,5 +15,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-
+.book-wrapper {
+  @include view-element();
+  background-color: $secondary-background;
+}
 </style>

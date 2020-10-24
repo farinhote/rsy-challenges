@@ -4,11 +4,15 @@
       <div class="book-info">
         <div class="header">
           <span class="title">{{ this.book.title }}</span>
-          <span class="rating">{{ rating }}</span>
+          <Vote :upvotes="book.upvotes" :upvoted="book.upvoted" />
         </div>
         <div class="author">{{ book.author }}</div>
-        <div class="synopsis">{{ book.synopsis }}</div>
-        <Vote :upvotes="book.upvotes" :upvoted="book.upvoted" />
+        <img :src="book.cover" />
+        <div class="book-data">
+          <h1 class="synopsis-title">Synopsis</h1>
+          <div class="synopsis">{{ book.synopsis }}</div>
+          <div class="rating">{{ rating }}</div>
+        </div>
       </div>
     </div>
     <div v-else class="loader"></div>
@@ -46,11 +50,16 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @include loading-spinner();
 
-.title {
-  @include book-title();
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  .title {
+    @include book-title(2rem, 700);
+  }
 }
 
 a {
@@ -63,30 +72,30 @@ a {
 }
 
 .book {
-  display: grid;
-  grid-template-columns: 5fr 1fr;
-
-  min-height: 14rem;
-
   .book-info {
-    align-self: start;
-    text-align: start;
-    margin: 1rem 2rem;
+    padding: 0 2rem;
     .author {
+      text-align: start;
       font-style: italic;
-      font-size: 0.8rem;
-
-      padding: 0.8rem 0 1rem 0;
+      font-size: 1.2rem;
+      padding-bottom: 1rem;
     }
   }
 
   img {
-    align-self: center;
-    justify-self: center;
     border-radius: $border-radius;
-    height: 12rem;
-    cursor: pointer;
-    margin-right: 1rem;
+    margin: 0 auto;
+  }
+}
+
+.book-data {
+  text-align: start;
+  .synopsis {
+    padding: 1rem 0;
+  }
+
+  .rating {
+    font-weight: 700;
   }
 }
 </style>

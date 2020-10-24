@@ -13,9 +13,11 @@ $max-page-width: 80%;
 
 $margin-center: 0 auto;
 
-@mixin center() {
+@mixin view-element() {
     width: $max-page-width;
-    margin: $margin-center;
+	margin: $margin-center;
+	box-shadow: 0 4px 10px gray;
+	min-height: 100vh;
 }
 
 @mixin title() {
@@ -24,10 +26,11 @@ $margin-center: 0 auto;
     color: $accent-color;
 }
 
-@mixin book-title() {
+@mixin book-title($size, $weight) {
     padding: 0.2rem;
-    font-size: 1.2rem;
-    color: $accent-color-darker;
+    font-size: $size;
+	color: $accent-color-darker;
+	font-weight: $weight;
 }
 
 @mixin animation-delay($property) {
