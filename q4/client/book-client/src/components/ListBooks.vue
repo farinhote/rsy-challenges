@@ -34,7 +34,7 @@ export default {
       return this.$store.state.books;
     },
     paginationIndex() {
-      return (this.$store.state.page - 1) * this.$store.state.pageSize;
+      return (this.$store.state.params.page - 1) * this.$store.state.params.pageSize;
     },
   },
 };

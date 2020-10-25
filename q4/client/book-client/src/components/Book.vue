@@ -38,7 +38,7 @@ export default {
 
   computed: {
     synopsis() {
-      return this.filterSynopsis(this.book.synopsis, this.$store.state.filter);
+      return this.filterSynopsis(this.book.synopsis, this.$store.state.params.filter);
     },
     title() {
       return `${this.book.position}. ${this.book.title}`;

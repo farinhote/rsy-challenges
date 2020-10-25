@@ -56,14 +56,14 @@ export default {
       this.$store.dispatch("fetchBooks", {
         page: newPage,
         pageSize: this.pageSize,
-        filter: this.$store.state.filter,
+        filter: this.$store.state.params.filter,
       });
     },
     pageSize: function (newPageSize, oldPageSize) {
       this.$store.dispatch("fetchBooks", {
         page: 1,
         pageSize: this.pageSize,
-        filter: this.$store.state.filter,
+        filter: this.$store.state.params.filter,
       });
     },
   },

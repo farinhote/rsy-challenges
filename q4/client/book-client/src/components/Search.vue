@@ -1,6 +1,7 @@
 <template>
   <div class="form__group field">
     <input
+      @input="filterChange"
       type="input"
       class="form__field"
       placeholder="Search"
@@ -18,30 +19,29 @@ import Search from "@/components/Search.vue";
 
 export default {
   name: "Search",
-  components: {  },
-  data() {
-    return {
-      filter: "",
-    };
-  },
+  components: {},
 
   methods: {
-    debouncedFilterChange(filter) {
-      const debounced = debounce(() => {
-        this.$store.dispatch("fetchBooks", {
-          filter: this.filter,
-          page: 1,
-          pageSize: this.$store.state.pageSize,
-        });
-      }, 500);
-
-      debounced();
-    },
+    filterChange: debounce(function() {
+      this.$store.dispatch("fetchBooks", {
+        filter: this.filter,
+        page: 1,
+        pageSize: this.$store.state.params.pageSize,
+      });
+    }, 500),
   },
 
-  watch: {
-    filter: function (newFilter, oldFilter) {
-      this.debouncedFilterChange(newFilter);
+  computed: {
+    filter: {
+      get: function () {
+        return this.$store.state.params.filter;
+      },
+      set: function (newValue) {
+        this.$store.commit("setParams", {
+          ...this.$store.state.params,
+          filter: newValue,
+        });
+      },
     },
   },
 };
