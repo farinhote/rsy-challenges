@@ -8,32 +8,37 @@
         </div>
       </router-link>
       <div class="author">{{ book.author }}</div>
-      <div class="synopsis">{{ synopsis }}</div>
+      <div v-html="synopsis" class="synopsis"></div>
       <Vote :upvotes="book.upvotes" :upvoted="book.upvoted" />
     </div>
 
-    <router-link
-      tag="img"
-      :src="book.cover"
-      :to="`/book/${book.slug}`"
-    />
+    <router-link tag="img" :src="book.cover" :to="`/book/${book.slug}`" />
   </div>
 </template>
 
 <script>
-import { truncate } from "lodash";
-import Vote from "@/components/Vote.vue";
+import { truncate } from 'lodash';
+import Vote from '@/components/Vote.vue';
 
 export default {
-  name: "Book",
+  name: 'Book',
   components: { Vote },
   props: {
     book: Object,
   },
 
+  methods: {
+    filterSynopsis(synopsis, filter) {
+      const regex = new RegExp(filter, 'gi');
+      const truncatedSynopsis = truncate(synopsis, { length: 200 });
+
+      return truncatedSynopsis.replaceAll(regex, '<b>' + filter + '</b>');
+    },
+  },
+
   computed: {
     synopsis() {
-      return truncate(this.book.synopsis, { length: 200 });
+      return this.filterSynopsis(this.book.synopsis, this.$store.state.filter);
     },
     title() {
       return `${this.book.position}. ${this.book.title}`;
@@ -53,7 +58,7 @@ export default {
 a {
   text-decoration: none;
 
-  .rating{
+  .rating {
     font: 100% $font;
     color: $primary-color;
   }

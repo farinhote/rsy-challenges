@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     books: [],
     book: {},
+    filter: ''
   },
   mutations: {
     FETCH_BOOKS(state, books) {
