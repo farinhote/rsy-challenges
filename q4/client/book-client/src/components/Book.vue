@@ -32,7 +32,7 @@ export default {
       const regex = new RegExp(filter, 'gi');
       const truncatedSynopsis = truncate(synopsis, { length: 200 });
 
-      return truncatedSynopsis.replaceAll(regex, '<b>' + filter + '</b>');
+      return truncatedSynopsis.replaceAll(regex, ((match) => '<b>' + match + '</b>'));
     },
   },
 

@@ -21,8 +21,10 @@ export default class BooksService {
     });
 
     if (filter) {
+      const regex = RegExp(filter, 'gi');
+
       booksList.books = booksList.books.filter(item =>
-        item.title.includes(filter) || item.synopsis.includes(filter)
+        regex.test(item.title) || regex.test(item.synopsis)
       );
 
       booksList.meta.count = booksList.books.length;
