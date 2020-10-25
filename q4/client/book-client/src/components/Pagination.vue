@@ -25,7 +25,6 @@ export default {
   data() {
     return {
       pageSize: 5,
-      page: 1,
     };
   },
 
@@ -45,19 +44,27 @@ export default {
 
   computed: {
     previousDisable() {
-      return this.page <= 1;
+      return this.$store.state.params.page <= 1;
     },
     nextDisable() {
-      return this.page * this.pageSize >= this.$store.state.count;
+      return this.$store.state.params.page * this.$store.state.params.pageSize >= this.$store.state.count;
+    },
+    page: {
+      get: function () {
+        return this.$store.state.params.page;
+      },
+      set: function (newValue) {
+        this.$store.commit("setParams", {
+          ...this.$store.state.params,
+          page: newValue,
+        });
+      },
     },
   },
+
   watch: {
     page: function (newPage, oldPage) {
-      this.$store.dispatch("fetchBooks", {
-        page: newPage,
-        pageSize: this.pageSize,
-        filter: this.$store.state.params.filter,
-      });
+      this.$store.dispatch("fetchBooks", {});
     },
     pageSize: function (newPageSize, oldPageSize) {
       this.$store.dispatch("fetchBooks", {
