@@ -8,7 +8,10 @@ export default new Vuex.Store({
   state: {
     books: [],
     book: {},
-    filter: ''
+    filter: '',
+    count: 0,
+    page: 1,
+    pageSize: 5,
   },
   mutations: {
     setBooks(state, books) {
@@ -19,6 +22,15 @@ export default new Vuex.Store({
     },
     setFilter(state, filter) {
       state.filter = filter;
+    },
+    setCount(state, count) {
+      state.count = count;
+    },
+    setPage(state, page) {
+      state.page = page;
+    },
+    setPageSize(state, pageSize) {
+      state.pageSize = pageSize;
     }
   },
   actions: {
@@ -26,7 +38,10 @@ export default new Vuex.Store({
       return client.fetchBooks(params)
         .then((response) => {
           commit("setBooks", response.books);
-          commit("setFilter", params.filter);
+          commit("setCount", response.meta.count);
+          commit("setFilter", params.filter || this.state.filter);
+          commit("setPage", params.page || this.state.page);
+          commit("setPageSize", params.pageSize || this.state.pageSize);
         })
         .catch((error) => {
           console.log(error.statusText);

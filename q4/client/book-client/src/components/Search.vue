@@ -1,15 +1,15 @@
 <template>
-    <div class="form__group field">
-      <input
-        type="input"
-        class="form__field"
-        placeholder="Search"
-        name="search"
-        id="search"
-        v-model="filter"
-      />
-      <label for="search" class="form__label">Search</label>
-    </div>
+  <div class="form__group field">
+    <input
+      type="input"
+      class="form__field"
+      placeholder="Search"
+      name="search"
+      id="search"
+      v-model="filter"
+    />
+    <label for="search" class="form__label">Search</label>
+  </div>
 </template>
 
 <script>
@@ -18,7 +18,7 @@ import Search from "@/components/Search.vue";
 
 export default {
   name: "Search",
-  components: { },
+  components: {  },
   data() {
     return {
       filter: "",
@@ -28,7 +28,11 @@ export default {
   methods: {
     debouncedFilterChange(filter) {
       const debounced = debounce(() => {
-        this.$store.dispatch("fetchBooks", { filter: this.filter} );
+        this.$store.dispatch("fetchBooks", {
+          filter: this.filter,
+          page: 1,
+          pageSize: this.$store.state.pageSize,
+        });
       }, 500);
 
       debounced();

@@ -7,9 +7,10 @@
       <Book
         v-for="(book, index) in books"
         :key="book.slug"
-        :book="{ ...book, position: index + 1 }"
+        :book="{ ...book, position: index + 1 + paginationIndex }"
       />
     </div>
+    <Pagination />
   </fragment>
 </template>
 
@@ -18,10 +19,11 @@ import { Fragment } from "vue-fragment";
 import { debounce } from "lodash";
 import Book from "@/components/Book.vue";
 import Search from "@/components/Search.vue";
+import Pagination from "@/components/Pagination.vue";
 
 export default {
   name: "ListBooks",
-  components: { Fragment, Book, Search },
+  components: { Fragment, Book, Search, Pagination },
 
   created() {
     this.$store.dispatch("fetchBooks");
@@ -30,6 +32,9 @@ export default {
   computed: {
     books() {
       return this.$store.state.books;
+    },
+    paginationIndex() {
+      return (this.$store.state.page - 1) * this.$store.state.pageSize;
     },
   },
 };

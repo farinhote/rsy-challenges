@@ -12,9 +12,9 @@ function _readFile() {
 export default class BooksService {
   static getAllBooks(request) {
     let booksList = JSON.parse(_readFile());
-    const { page = 1 , pagesize = 5, filter = '' } = request.query;
-    const firstIndex = (page-1) * pagesize;
-    const lastIndex = page * pagesize;
+    const { page = 1 , pageSize = 5, filter = '' } = request.query;
+    const firstIndex = (page-1) * pageSize;
+    const lastIndex = page * pageSize;
 
     booksList.books.forEach(b => {
       b.cover = `${ request.server.info.uri }/images/${ b.cover }`;
