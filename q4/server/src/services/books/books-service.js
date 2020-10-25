@@ -10,7 +10,7 @@ function _readFile() {
 }
 
 export default class BooksService {
-  static getAllBooks(request) {
+  static getFilteredBooks(request) {
     let booksList = JSON.parse(_readFile());
     const { page = 1 , pageSize = 5, filter = '' } = request.query;
     const firstIndex = (page-1) * pageSize;
@@ -30,6 +30,15 @@ export default class BooksService {
       booksList.meta.count = booksList.books.length;
     }
     booksList.books = booksList.books.slice(firstIndex, lastIndex);
+
+    return JSON.stringify(booksList);
+  }
+
+  static getAllBooks(request) {
+    let booksList = JSON.parse(_readFile());
+    booksList.books.forEach(b => {
+      b.cover = `${ request.server.info.uri }/images/${ b.cover }`;
+    });
 
     return JSON.stringify(booksList);
   }

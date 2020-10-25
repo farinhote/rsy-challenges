@@ -15,7 +15,7 @@ function getBook(request, h) {
 }
 
 function getBooksList(request, h) {
-  const books = BooksService.getAllBooks(request);
+  const books = BooksService.getFilteredBooks(request);
   return books;
 }
 
