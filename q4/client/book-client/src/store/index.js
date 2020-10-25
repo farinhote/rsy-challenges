@@ -11,18 +11,22 @@ export default new Vuex.Store({
     filter: ''
   },
   mutations: {
-    FETCH_BOOKS(state, books) {
+    setBooks(state, books) {
       state.books = books;
     },
-    FETCH_BOOK(state, book) {
+    setBook(state, book) {
       state.book = book;
+    },
+    setFilter(state, filter) {
+      state.filter = filter;
     }
   },
   actions: {
-    fetchBooks({ commit }) {
-      return client.fetchBooks()
+    fetchBooks({ commit }, params) {
+      return client.fetchBooks(params)
         .then((response) => {
-          commit("FETCH_BOOKS", response.books);
+          commit("setBooks", response.books);
+          commit("setFilter", params.filter);
         })
         .catch((error) => {
           console.log(error.statusText);
@@ -31,7 +35,7 @@ export default new Vuex.Store({
     fetchBook({ commit }, bookSlug) {
       return client.fetchBook(bookSlug)
         .then((response) => {
-          commit("FETCH_BOOK", response);
+          commit("setBook", response);
         })
         .catch((error) => {
           console.log(error.statusText);

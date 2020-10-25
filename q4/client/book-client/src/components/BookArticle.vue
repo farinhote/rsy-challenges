@@ -35,7 +35,7 @@ export default {
 
   created() {
     // If the last book is still in store we clean it up before fetching a new one
-    if (this.$store.state.book.slug) this.$store.commit("FETCH_BOOK", {});
+    if (this.$store.state.book.slug) this.$store.commit("setBook", {});
 
     this.$store.dispatch("fetchBook", this.$route.params.id).then(() => {
       this.book = this.$store.state.book;
