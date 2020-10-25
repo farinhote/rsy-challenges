@@ -1,0 +1,83 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Front end Engineer Challenge Q3.2.3</title>
+  </head>
+  <body>
+	<div id="append">original div</div>
+  </body>
+  <script>
+	const appendDiv = document.getElementById("append");
+	function createElementTest() {
+		const newDiv = document.createElement("div");
+		const newContent = document.createTextNode("test text");
+
+		newDiv.appendChild(newContent);
+		appendDiv.appendChild(newDiv);
+	}
+
+	function innerHtmlTest() {
+		appendDiv.innerHTML += '<div>test text</div>';
+	}
+
+	function textContentTest() {
+		appendDiv.textContent += '<div>test text</div>';
+	}
+
+	function innerHtmlTest1k() {
+		let innerHTMLToSet = '';
+		for (let index = 0; index < 1000; index++) {
+			innerHTMLToSet += '<div>test text</div>';
+		}
+		appendDiv.innerHTML += innerHTMLToSet;
+	}
+
+	function documentFragmentTest1k() {
+		let fragment = document.createDocumentFragment();
+		for (let i = 0; i < 1000; i++) {
+			let div = document.createElement('div');
+			div.textContent = 'test text';
+			fragment.appendChild(div);
+		}
+
+		// append the fragment to the DOM tree
+		appendDiv.appendChild(fragment);
+	}
+
+	const run1kTests = (timerName, callBack, count) => {
+		console.time(timerName);
+
+		for (let index = 0; index < 1000; index++) {
+			callBack();
+		}
+		console.timeEnd(timerName)
+
+		if (count !== 1) {
+			run1kTests(timerName, callBack, --count);
+		}
+	}
+
+	const add1kTest = (timerName, callBack, count) => {
+		console.time(timerName);
+
+		callBack();
+
+		console.timeEnd(timerName)
+
+		if (count !== 1) {
+			add1kTest(timerName, callBack, --count);
+		}
+	}
+
+
+	run1kTests('createElement', createElementTest, 5);
+	appendDiv.innerHTML = ''; //clear Div of children
+	run1kTests('innerHtml', innerHtmlTest, 5);
+	appendDiv.innerHTML = ''; //clear Div of children
+	add1kTest('innerHtmlBulk', innerHtmlTest1k, 5);
+	appendDiv.innerHTML = ''; //clear Div of children
+	add1kTest('documentFragment', documentFragmentTest1k, 5);
+	appendDiv.innerHTML = ''; //clear Div of children
+</script>
+</html>
