@@ -20,7 +20,7 @@ npm run serve
 3. On the second terminal:
 
 ```
-cd ${repo_root}/server
+cd ${repo_root}/q4/server
 npm install
 ```
 
@@ -29,3 +29,5 @@ npm install
 ```
 npm run server
 ```
+
+## Answers are in a plain txt on the ${repo_root}
