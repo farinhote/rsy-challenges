@@ -1,0 +1,58 @@
+1. Tell us about one of your commercial projects with Vue.js or AngularJS.
+    I have never worked with Vue.JS professional, my passion with Vue.JS is purely personal, i have been following it,
+        and have been searching for a job in it for a long time. I really enjoy its simplicity and out-of-the-way architecture,
+        it allows me to focus on the problem.
+
+2.1 What kind of front end projects do you enjoy working on? Why?
+    I have worked for finance and worked in e-commerce.
+    So far i have enjoyed much more to work with e-commerce as my job helps real people get the best deal for their money.
+    Thats why i have been looking for a more people oriented project, something that actually improves people's lives.
+    I want to embrace a project that makes an actual difference to its users.
+
+2.2 Which are your favorite features of HTML5? How have you used them before?
+    Best features that i have used extensively:
+        regex pattern validation
+        autofocus
+        placeholder
+        Required
+        auto email validation
+
+    I think the one i have used the most is regex pattern validation, use it regularly to validate input fields
+        for different countries which have different validations for the same fields(e.g.: country ID)
+
+2.3 Explain the difference between creating a DOM element setting innerHTML and using createElement.
+    Security:
+        innerHTML will basically allow XSS attacks if the html comes from an unknown source(user submitted content normally) to happen has
+            the browser will execute any <script> tags it finds.
+        createElement however does not have this problem(unless you are creating a script tag from an unknown source, which becomes a very obvious flaw to write)
+
+    Code cleaniness:
+        innerHTML might be shorter, but is harder to maintain and harder to debug, if i were to implement such a system i would force template strings
+            and const values e.g.: element.innerHTML = `${DIV}${CLASS_ACTIVE}${TAG_CLOSURE}${contentToInsert}${DIV_END}`;
+        createElement while more verbose feels easy to read and to argue with, and easier to debug.
+
+    Performance:
+        I decided to run my own tests, i have added a file @repo/q4/bench/2.3.html
+        i tried several methods, and by order of more Performance to least Performance(on my machine) we have:
+            innerHTML the more inner nodes the parent has the longer it takes the browser to parse everything
+            innerHTMLBulk, while much faster we can still see overhead from stacking multiple nodes
+            createElement, independent of siblings nodes, much faster
+            documentFragment, even faster than createElement
+
+2.4 Compare two-way data binding vs one-way data flow.
+    One-way data flow will make the view part of the component update whenever the data changes.
+    Two-way data flow(binding) will work the same way but also work in the reverse way, the changes in view will change the data,
+        important for form input(v-model in Vue)
+
+2.5 Why is asynchronous programming important in JavaScript?
+    Synchronous code, in UI context would block an users ability to interact with the application, lets say an user as an excel-like grid,
+        he wants download in CSV 1.000.000 entries, this will take 20s for the server to process, whenever the user clicks download,
+        if the request is synchronous the whole application will seize waiting for the server response.
+        The ux will be awful and might even send a new user to another product.
+
+        This is aggravated further if the server itself is synchronous, lets say we have only 100 users active, each wants a 1s request from the server.
+        As the server as no asynchronous functionality it will pile the requests waiting for the last request to be fulfilled.
+        The last user could wait up to 100s for its simple request to be finish.
+
+    Async code means that the engine runs in an event loop. It will basically allow to JS to process several requests without blocking and keeping the code running.
+        Not blocking UI and allow the server to take several requests at the same time
