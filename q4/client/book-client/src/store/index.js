@@ -38,7 +38,7 @@ export default new Vuex.Store({
           const { books, meta: { count } } = response;
           commit("setBooks", books);
           commit("setCount", count);
-debugger
+
           if (count <= books.length) {
             commit("setParams", { ...this.state.params, page: 1 });
           }
